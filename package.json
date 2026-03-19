@@ -1,0 +1,51 @@
+{
+  "name": "payload-next-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/next-runner.mjs dev",
+    "build": "next build",
+    "start": "node scripts/next-runner.mjs start",
+    "start:standalone": "node scripts/start-standalone.mjs",
+    "lint": "eslint",
+    "seed": "node --require ./scripts/preload-env.cjs node_modules/tsx/dist/cli.cjs --tsconfig tsconfig.seed.json src/seed.ts",
+    "seed:run": "node --require ./scripts/preload-env.cjs node_modules/tsx/dist/cli.cjs --tsconfig tsconfig.seed.json src/seed.ts"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "^3.79.0",
+    "@payloadcms/live-preview-react": "^3.79.0",
+    "@payloadcms/next": "^3.79.0",
+    "@payloadcms/plugin-nested-docs": "^3.79.0",
+    "@payloadcms/plugin-redirects": "^3.79.0",
+    "@payloadcms/plugin-search": "^3.79.0",
+    "@payloadcms/plugin-seo": "^3.79.0",
+    "@payloadcms/richtext-lexical": "^3.79.0",
+    "@payloadcms/ui": "^3.79.0",
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.3.1",
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
+    "graphql": "^16.13.1",
+    "lucide-react": "^0.575.0",
+    "next": "16.2.0-canary.99",
+    "payload": "^3.79.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "sharp": "^0.34.5",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "tailwindcss": "^4",
+    "tsx": "^4",
+    "typescript": "^5"
+  }
+}
