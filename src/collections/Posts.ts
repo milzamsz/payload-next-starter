@@ -35,6 +35,7 @@ export const Posts: CollectionConfig = {
       label: 'Article Title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'slug',
@@ -42,6 +43,7 @@ export const Posts: CollectionConfig = {
       type: 'text',
       required: true,
       unique: true,
+      // slug is NOT localized — one slug shared across languages
       admin: {
         description: 'Auto-generated from title, e.g. my-first-post',
       },
@@ -50,6 +52,7 @@ export const Posts: CollectionConfig = {
       name: 'excerpt',
       label: 'Short Summary',
       type: 'textarea',
+      localized: true,
     },
     {
       name: 'featuredImage',
@@ -63,6 +66,7 @@ export const Posts: CollectionConfig = {
       type: 'richText',
       editor: defaultLexical,
       required: true,
+      localized: true,
     },
     {
       name: 'categories',

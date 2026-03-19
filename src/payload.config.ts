@@ -63,6 +63,15 @@ export default buildConfig({
 
   editor: lexicalEditor(),
 
+  localization: {
+    locales: [
+      { label: 'English', code: 'en' },
+      { label: 'Bahasa Indonesia', code: 'id' },
+    ],
+    defaultLocale: 'en',
+    fallback: true, // fall back to defaultLocale if a translation is missing
+  },
+
   plugins,
 
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret-change-in-production',

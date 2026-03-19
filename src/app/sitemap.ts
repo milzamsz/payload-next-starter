@@ -1,43 +1,47 @@
 import { MetadataRoute } from 'next'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { locales } from '@/i18n/config'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
+  // Static pages — one entry per locale with hreflang alternates
+  const staticPaths = ['', '/about', '/services', '/blog', '/contact']
+  const staticUrls: MetadataRoute.Sitemap = locales.flatMap((locale) =>
+    staticPaths.map((path) => ({
+      url: `${baseUrl}/${locale}${path}`,
+      lastModified: new Date(),
+      alternates: {
+        languages: Object.fromEntries(
+          locales.map((l) => [l, `${baseUrl}/${l}${path}`])
+        ),
+      },
+    }))
+  )
+
   try {
     const payload = await getPayload({ config })
-
-    const { docs: pages } = await payload.find({
-      collection: 'pages',
-      where: { _status: { equals: 'published' } },
-    })
 
     const { docs: posts } = await payload.find({
       collection: 'posts',
       where: { _status: { equals: 'published' } },
     })
 
-    const pageUrls = pages.map((page) => ({
-      url: `${baseUrl}/${page.slug}`,
-      lastModified: new Date(),
-    }))
+    const postUrls: MetadataRoute.Sitemap = posts.flatMap((post) =>
+      locales.map((locale) => ({
+        url: `${baseUrl}/${locale}/blog/${post.slug}`,
+        lastModified: post.publishedAt ? new Date(post.publishedAt) : new Date(),
+        alternates: {
+          languages: Object.fromEntries(
+            locales.map((l) => [l, `${baseUrl}/${l}/blog/${post.slug}`])
+          ),
+        },
+      }))
+    )
 
-    const postUrls = posts.map((post) => ({
-      url: `${baseUrl}/blog/${post.slug}`,
-      lastModified: post.publishedAt ? new Date(post.publishedAt) : new Date(),
-    }))
-
-    return [
-      { url: baseUrl, lastModified: new Date() },
-      { url: `${baseUrl}/about`, lastModified: new Date() },
-      { url: `${baseUrl}/services`, lastModified: new Date() },
-      { url: `${baseUrl}/blog`, lastModified: new Date() },
-      { url: `${baseUrl}/contact`, lastModified: new Date() },
-      ...pageUrls,
-      ...postUrls,
-    ]
+    return [...staticUrls, ...postUrls]
   } catch {
-    return [{ url: baseUrl, lastModified: new Date() }]
+    return staticUrls
   }
 }
