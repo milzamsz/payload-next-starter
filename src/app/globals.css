@@ -3,8 +3,8 @@
 /* ─── Font Theme ─────────────────────────────────────────── */
 @theme {
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Georgia', ui-serif, serif;
-  --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
+  --font-display: 'Playfair Display', ui-serif, Georgia, serif;
 
   /* ─── Color Palette ────────────────────────────────────── */
   --color-primary: var(--primary);
@@ -25,26 +25,36 @@
 /* ─── Design Tokens ──────────────────────────────────────── */
 /* TODO: Customize these colors to match your brand */
 :root {
-  /* Base Colors */
-  --primary: #2563eb;
+  /* Primary — deep indigo */
+  --primary: #4F46E5;
   --primary-foreground: #FFFFFF;
 
-  --secondary: #64748b;
+  /* Secondary — slate */
+  --secondary: #64748B;
   --secondary-foreground: #FFFFFF;
 
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
+  /* Muted — light cool grey */
+  --muted: #F1F5F9;
+  --muted-foreground: #64748B;
 
-  --accent: #f59e0b;
+  /* Accent — amber */
+  --accent: #F59E0B;
+  --accent-foreground: #1E1B4B;
 
-  --background: #FAFAFA;
-  --foreground: #0f172a;
+  /* Surface */
+  --background: #FAFBFF;
+  --foreground: #0F172A;
 
   --card: #FFFFFF;
-  --card-foreground: #0f172a;
+  --card-foreground: #0F172A;
 
-  --border: #e2e8f0;
-  --ring: #2563eb;
+  --border: #E2E8F0;
+  --ring: #4F46E5;
+
+  /* Extended palette */
+  --primary-50: #EEF2FF;
+  --primary-100: #E0E7FF;
+  --primary-900: #312E81;
 }
 
 /* ─── Scrollbar Hide ─────────────────────────────────────── */

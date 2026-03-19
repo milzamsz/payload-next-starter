@@ -43,6 +43,7 @@ export default function Navbar({ global, header }: NavbarProps) {
     // TODO: Update fallback nav links to match your site structure
     const fallbackNavLinks: NavLink[] = [
         { label: "Home", href: "/", isButton: false },
+        { label: "Services", href: "/services", isButton: false },
         { label: "Blog", href: "/blog", isButton: false },
         { label: "About", href: "/about", isButton: false },
         { label: "Contact", href: "/contact", isButton: true },

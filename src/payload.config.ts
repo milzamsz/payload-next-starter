@@ -10,6 +10,9 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Categories } from './collections/Categories'
+import { Services } from './collections/Services'
+import { Portfolio } from './collections/Portfolio'
+import { Team } from './collections/Team'
 import { ContactSubmissions } from './collections/ContactSubmissions'
 
 import { Header } from './globals/Header'
@@ -43,6 +46,9 @@ export default buildConfig({
     Pages,
     Posts,
     Categories,
+    Services,
+    Portfolio,
+    Team,
     ContactSubmissions,
   ],
 

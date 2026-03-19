@@ -15,12 +15,13 @@ export const plugins = [
     collections: ['categories'],
   }),
   searchPlugin({
-    collections: ['posts'],
+    collections: ['posts', 'portfolio'],
     defaultPriorities: {
       posts: 10,
+      portfolio: 20,
     },
   }),
   redirectsPlugin({
-    collections: ['pages', 'posts'],
+    collections: ['pages', 'posts', 'services', 'portfolio'],
   }),
 ]
