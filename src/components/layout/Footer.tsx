@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Locale } from '@/i18n/config'
 import type { Dictionary } from '@/i18n/dictionaries/en'
+import NewsletterForm from '@/components/newsletter/NewsletterForm'
 
 interface FooterProps {
   global?: { siteName?: string }
@@ -65,7 +66,7 @@ export default function Footer({ global, footer, siteSettings, locale, dict }: F
   return (
     <footer className="bg-[var(--foreground)] text-white py-16 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 items-start">
 
           {/* Brand */}
           <div className="flex flex-col gap-4">
@@ -87,6 +88,11 @@ export default function Footer({ global, footer, siteSettings, locale, dict }: F
                 {l.label}
               </Link>
             ))}
+          </div>
+
+          {/* Newsletter */}
+          <div className="flex flex-col gap-4">
+            <NewsletterForm t={t.newsletter} />
           </div>
 
           {/* Social */}

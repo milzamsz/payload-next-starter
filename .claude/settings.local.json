@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:skills.sh)",
+      "Bash(cp \"c:/Projects/VIBE TEMPLATE/prompts/01-generate-agents.md\" \"c:/Projects/Personal/TEMPLATE/payload-next-starter/prompts/01-generate-agents.md\")",
+      "Bash(cp \"c:/Projects/VIBE TEMPLATE/prompts/02-generate-agent-context.md\" \"c:/Projects/Personal/TEMPLATE/payload-next-starter/prompts/02-generate-agent-context.md\")",
+      "Bash(cp \"c:/Projects/VIBE TEMPLATE/prompts/03-generate-prd.md\" \"c:/Projects/Personal/TEMPLATE/payload-next-starter/prompts/03-generate-prd.md\")",
+      "Bash(cp \"c:/Projects/VIBE TEMPLATE/prompts/04-generate-skills.md\" \"c:/Projects/Personal/TEMPLATE/payload-next-starter/prompts/04-generate-skills.md\")"
+    ]
+  }
+}

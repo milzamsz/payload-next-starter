@@ -1,0 +1,32 @@
+{
+  "project": "payload-next-starter",
+  "version": "1.0.0",
+  "skills": [
+    {
+      "name": "Payload Next Starter",
+      "slug": "payload-next-starter",
+      "description": "Primary project skill for developing features in this Payload CMS 3 + Next.js 16 + PostgreSQL + Resend repo.",
+      "triggers": [
+        "add or modify a collection, global, block, or hook",
+        "add a page route or API endpoint",
+        "add or change email templates",
+        "add or update i18n strings"
+      ],
+      "file": "skills/payload-next-starter/SKILL.md"
+    }
+  ],
+  "upstream": [
+    {
+      "name": "Vercel React Best Practices",
+      "slug": "vercel-react-best-practices",
+      "source": "https://github.com/vercel-labs/agent-skills",
+      "location": "skills/vercel-react-best-practices"
+    },
+    {
+      "name": "Payload CMS",
+      "slug": "payload",
+      "source": "https://github.com/payloadcms/skills",
+      "location": "skills/payload"
+    }
+  ]
+}

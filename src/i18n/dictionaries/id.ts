@@ -191,6 +191,14 @@ const id: Dictionary = {
     followUs: 'Temukan Kami',
     navigation: 'Navigasi',
     builtWith: 'Dibangun dengan Payload CMS + Next.js',
+    newsletter: {
+      heading: 'Tetap Terupdate',
+      placeholder: 'Alamat email Anda',
+      subscribe: 'Langganan',
+      subscribing: 'Mendaftar…',
+      success: 'Anda telah berlangganan!',
+      error: 'Terjadi kesalahan. Silakan coba lagi.',
+    },
   },
 }
 

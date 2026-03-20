@@ -189,6 +189,14 @@ const en = {
     followUs: 'Follow Us',
     navigation: 'Navigation',
     builtWith: 'Built with Payload CMS + Next.js',
+    newsletter: {
+      heading: 'Stay Updated',
+      placeholder: 'Your email address',
+      subscribe: 'Subscribe',
+      subscribing: 'Subscribing…',
+      success: "You're subscribed!",
+      error: 'Something went wrong. Please try again.',
+    },
   },
 }
 

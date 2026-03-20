@@ -2,6 +2,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp'
 
@@ -73,6 +74,21 @@ export default buildConfig({
   },
 
   plugins,
+
+  email: nodemailerAdapter({
+    defaultFromAddress: process.env.EMAIL_FROM ?? 'noreply@example.com',
+    defaultFromName: process.env.NEXT_PUBLIC_SITE_NAME ?? 'My App',
+    // Uses Resend SMTP — swap for any SMTP provider
+    transportOptions: {
+      host: 'smtp.resend.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: 'resend',
+        pass: process.env.RESEND_API_KEY,
+      },
+    },
+  }),
 
   secret: process.env.PAYLOAD_SECRET || 'fallback-secret-change-in-production',
 

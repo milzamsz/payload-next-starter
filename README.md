@@ -12,6 +12,7 @@ A comprehensive, production-ready boilerplate for building content-driven web ap
 | Styling | Tailwind CSS v4 |
 | Language | TypeScript |
 | i18n | Built-in EN / ID with locale routing |
+| Email | Resend (contact, newsletter, auth) |
 | Deployment | Docker + standalone output |
 
 ---
@@ -80,7 +81,11 @@ src/
 │   │   ├── page.tsx       # Redirects → /en
 │   │   └── ...            # Other routes redirect to /en/*
 │   │
-│   ├── (payload)/         # Payload admin UI (do not modify)
+│   ├── (payload)/         # Payload admin UI + custom API routes
+│   │   └── api/
+│   │       ├── [...slug]/ # Payload REST catch-all
+│   │       ├── contact-submissions/  # Contact form handler (saves + emails)
+│   │       └── newsletter/           # Newsletter signup → Resend Audience
 │   │
 │   ├── globals.css        # Tailwind + design tokens (customize colors here)
 │   ├── robots.ts
@@ -111,8 +116,10 @@ src/
 ├── components/
 │   ├── layout/
 │   │   ├── Navbar.tsx          # Accepts locale + dict props; includes LanguageSwitcher
-│   │   ├── Footer.tsx          # Accepts locale + dict props
+│   │   ├── Footer.tsx          # Accepts locale + dict props; includes newsletter form
 │   │   └── LanguageSwitcher.tsx  # Pill (navbar) and dropdown variants
+│   ├── newsletter/
+│   │   └── NewsletterForm.tsx  # Newsletter signup form (client component)
 │   └── ui/
 │       └── button.tsx
 │
@@ -135,6 +142,10 @@ src/
 │       └── id.ts          # Bahasa Indonesia strings
 │
 ├── lib/
+│   ├── email/
+│   │   ├── client.ts      # Resend singleton + env guards
+│   │   ├── templates.ts   # HTML email templates
+│   │   └── index.ts       # sendContactNotification, sendContactAutoReply, addNewsletterSubscriber
 │   └── utils.ts           # cn() utility
 │
 ├── middleware.ts           # Locale detection via Accept-Language → redirect
@@ -145,7 +156,7 @@ src/
 ├── utilities/
 │   └── getURL.ts
 │
-├── payload.config.ts      # Main Payload config (localization: en/id)
+├── payload.config.ts      # Main Payload config (localization: en/id, email adapter)
 └── seed.ts                # Database seed script
 
 scripts/
@@ -153,6 +164,49 @@ scripts/
 ├── preload-env.cjs        # ESM/CJS fix for seed script
 └── start-standalone.mjs   # Production standalone server
 ```
+
+---
+
+## Email System
+
+Powered by [Resend](https://resend.com). Requires a Resend account (free tier: 3,000 emails/month).
+
+### Features
+
+- **Contact form** — saves submission to CMS, sends admin notification + auto-reply to sender
+- **Newsletter** — adds subscriber to a Resend Audience and sends a confirmation email
+- **Auth emails** — Payload password reset emails sent via Resend SMTP
+
+### Setup
+
+1. Sign up at [resend.com](https://resend.com) and create an API key
+2. Add a verified sending domain
+3. Set environment variables:
+
+```env
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
+EMAIL_FROM=noreply@yourdomain.com
+ADMIN_EMAIL=admin@yourdomain.com
+
+# Optional — enables newsletter feature
+RESEND_AUDIENCE_ID=aud_xxxxxxxxxxxxxxxxxxxx
+```
+
+### Development mode
+
+When `RESEND_API_KEY` is not set, emails are logged to the console instead of being sent — no key required for local development.
+
+### Customizing templates
+
+Edit `src/lib/email/templates.ts`:
+
+- `contactNotificationTemplate()` — admin notification on new contact form submission
+- `contactAutoReplyTemplate()` — confirmation email sent to the visitor
+- `newsletterConfirmationTemplate()` — sent after newsletter signup
+
+### Disabling newsletter
+
+Remove `<NewsletterForm>` from `src/components/layout/Footer.tsx` and unset `RESEND_AUDIENCE_ID`.
 
 ---
 
@@ -226,7 +280,7 @@ Go to `/admin` → Pages → create a new page. The block builder lets you compo
 | Services | Service offerings — title, tagline, highlights localized |
 | Portfolio | Case studies with gallery + testimonial |
 | Team | Team member profiles |
-| ContactSubmissions | Form submissions (status tracking) |
+| ContactSubmissions | Form submissions (status: new / read / replied) |
 
 ## Globals
 
@@ -274,9 +328,16 @@ npm run start
 
 Set these env vars on your platform:
 
-- `DATABASE_URL`
-- `PAYLOAD_SECRET`
-- `NEXT_PUBLIC_SERVER_URL`
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `DATABASE_URL` | Yes | PostgreSQL connection string |
+| `PAYLOAD_SECRET` | Yes | Random secret for Payload auth |
+| `NEXT_PUBLIC_SERVER_URL` | Yes | Public URL (e.g. `https://myapp.com`) |
+| `NEXT_PUBLIC_SITE_NAME` | No | Site name used in emails (default: `My App`) |
+| `RESEND_API_KEY` | Yes (email) | Resend API key |
+| `EMAIL_FROM` | Yes (email) | Verified sender address |
+| `ADMIN_EMAIL` | Yes (email) | Contact form notification recipient |
+| `RESEND_AUDIENCE_ID` | No | Enables newsletter feature |
 
 ---
 

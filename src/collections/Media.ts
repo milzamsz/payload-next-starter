@@ -9,7 +9,7 @@ export const Media: CollectionConfig = {
     plural: 'Media Library',
   },
   upload: {
-    staticDir: 'public/media',
+    staticDir: 'public/media', // local fallback (ignored when S3 is configured)
     imageSizes: [
       {
         name: 'thumbnail',
